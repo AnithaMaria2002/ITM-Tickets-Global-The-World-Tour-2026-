@@ -1,0 +1,121 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Temp\\ITM-Tickets-Global-The-World-Tour-2026-\\Festival.DosMundos\\festival\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B8D8EB83-D9AE-5C05-3695-39C74B0AA03D}|Festival.Order.Api\\Festival.Order.Api.csproj|c:\\temp\\itm-tickets-global-the-world-tour-2026-\\festival.dosmundos\\festival\\festival.order.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B8D8EB83-D9AE-5C05-3695-39C74B0AA03D}|Festival.Order.Api\\Festival.Order.Api.csproj|solutionrelative:festival.order.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\dotnet\\sdk\\10.0.103\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.NET.Sdk.ImportWorkloads.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3ADD7EC2-00D3-B37D-B064-A2C9E1A06755}|Festival.Store.Mobile\\Festival.Store.Mobile.csproj|c:\\temp\\itm-tickets-global-the-world-tour-2026-\\festival.dosmundos\\festival\\festival.store.mobile\\festival.store.mobile.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{3ADD7EC2-00D3-B37D-B064-A2C9E1A06755}|Festival.Store.Mobile\\Festival.Store.Mobile.csproj|solutionrelative:festival.store.mobile\\festival.store.mobile.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8ADFC714-64D9-CCEA-8887-B16A40C3C203}|Festival.Search.Api\\Festival.Search.Api.csproj|c:\\temp\\itm-tickets-global-the-world-tour-2026-\\festival.dosmundos\\festival\\festival.search.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8ADFC714-64D9-CCEA-8887-B16A40C3C203}|Festival.Search.Api\\Festival.Search.Api.csproj|solutionrelative:festival.search.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{84200CED-49BB-9E3B-0A22-185FC2CB45F3}|Festival.Inventory.Api\\Festival.Inventory.Api.csproj|c:\\temp\\itm-tickets-global-the-world-tour-2026-\\festival.dosmundos\\festival\\festival.inventory.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{84200CED-49BB-9E3B-0A22-185FC2CB45F3}|Festival.Inventory.Api\\Festival.Inventory.Api.csproj|solutionrelative:festival.inventory.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{84200CED-49BB-9E3B-0A22-185FC2CB45F3}|Festival.Inventory.Api\\Festival.Inventory.Api.csproj|c:\\temp\\itm-tickets-global-the-world-tour-2026-\\festival.dosmundos\\festival\\festival.inventory.api\\festival.inventory.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{84200CED-49BB-9E3B-0A22-185FC2CB45F3}|Festival.Inventory.Api\\Festival.Inventory.Api.csproj|solutionrelative:festival.inventory.api\\festival.inventory.api.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Temp\\ITM-Tickets-Global-The-World-Tour-2026-\\Festival.DosMundos\\festival\\Festival.Order.Api\\Program.cs",
+              "RelativeDocumentMoniker": "Festival.Order.Api\\Program.cs",
+              "ToolTip": "C:\\Temp\\ITM-Tickets-Global-The-World-Tour-2026-\\Festival.DosMundos\\festival\\Festival.Order.Api\\Program.cs",
+              "RelativeToolTip": "Festival.Order.Api\\Program.cs",
+              "ViewState": "AgIAAD0AAAAAAAAAAAAUwEYAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T15:37:02.368Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Microsoft.NET.Sdk.ImportWorkloads.targets",
+              "DocumentMoniker": "C:\\Program Files\\dotnet\\sdk\\10.0.103\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.NET.Sdk.ImportWorkloads.targets",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\Program Files\\dotnet\\sdk\\10.0.103\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.NET.Sdk.ImportWorkloads.targets",
+              "ToolTip": "C:\\Program Files\\dotnet\\sdk\\10.0.103\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.NET.Sdk.ImportWorkloads.targets",
+              "RelativeToolTip": "..\\..\\..\\..\\Program Files\\dotnet\\sdk\\10.0.103\\Sdks\\Microsoft.NET.Sdk\\targets\\Microsoft.NET.Sdk.ImportWorkloads.targets",
+              "ViewState": "AgIAABsAAAAAAAAAAAAowCUAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
+              "WhenOpened": "2026-05-06T15:36:58.449Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Festival.Store.Mobile",
+              "DocumentMoniker": "C:\\Temp\\ITM-Tickets-Global-The-World-Tour-2026-\\Festival.DosMundos\\festival\\Festival.Store.Mobile\\Festival.Store.Mobile.csproj",
+              "RelativeDocumentMoniker": "Festival.Store.Mobile\\Festival.Store.Mobile.csproj",
+              "ToolTip": "C:\\Temp\\ITM-Tickets-Global-The-World-Tour-2026-\\Festival.DosMundos\\festival\\Festival.Store.Mobile\\Festival.Store.Mobile.csproj",
+              "RelativeToolTip": "Festival.Store.Mobile\\Festival.Store.Mobile.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-05-06T15:36:56.074Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Temp\\ITM-Tickets-Global-The-World-Tour-2026-\\Festival.DosMundos\\festival\\Festival.Search.Api\\Program.cs",
+              "RelativeDocumentMoniker": "Festival.Search.Api\\Program.cs",
+              "ToolTip": "C:\\Temp\\ITM-Tickets-Global-The-World-Tour-2026-\\Festival.DosMundos\\festival\\Festival.Search.Api\\Program.cs",
+              "RelativeToolTip": "Festival.Search.Api\\Program.cs",
+              "ViewState": "AgIAAFcAAAAAAAAAAAAUwGAAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T15:36:52.251Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Temp\\ITM-Tickets-Global-The-World-Tour-2026-\\Festival.DosMundos\\festival\\Festival.Inventory.Api\\Program.cs",
+              "RelativeDocumentMoniker": "Festival.Inventory.Api\\Program.cs",
+              "ToolTip": "C:\\Temp\\ITM-Tickets-Global-The-World-Tour-2026-\\Festival.DosMundos\\festival\\Festival.Inventory.Api\\Program.cs",
+              "RelativeToolTip": "Festival.Inventory.Api\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-06T15:35:38.107Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Festival.Inventory.Api",
+              "DocumentMoniker": "C:\\Temp\\ITM-Tickets-Global-The-World-Tour-2026-\\Festival.DosMundos\\festival\\Festival.Inventory.Api\\Festival.Inventory.Api.csproj",
+              "RelativeDocumentMoniker": "Festival.Inventory.Api\\Festival.Inventory.Api.csproj",
+              "ToolTip": "C:\\Temp\\ITM-Tickets-Global-The-World-Tour-2026-\\Festival.DosMundos\\festival\\Festival.Inventory.Api\\Festival.Inventory.Api.csproj",
+              "RelativeToolTip": "Festival.Inventory.Api\\Festival.Inventory.Api.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-05-06T15:35:32.257Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

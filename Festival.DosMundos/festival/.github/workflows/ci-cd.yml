@@ -1,0 +1,192 @@
+# =============================================================================
+# FESTIVAL DE LOS DOS MUNDOS - GitHub Actions CI/CD Pipeline
+#
+# Trigger: Cada push a 'main'
+# Flujo:
+# 1. Build y Test de todos los microservicios
+# 2. Build de imágenes Docker (multi-stage)
+# 3. Push a Docker Hub
+# 4. Deploy automático a Kubernetes (opcional)
+# =============================================================================
+
+name: Festival CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}   # Configurar en Settings > Secrets
+  REGISTRY: docker.io
+
+jobs:
+
+  # ===========================================================================
+  # JOB 1: Build y Tests
+  # Compila todos los proyectos y corre las pruebas unitarias
+  # ===========================================================================
+  build-and-test:
+    name: Build & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Configurar .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restaurar dependencias NuGet
+        run: dotnet restore Festival.Store.System.slnx
+
+      - name: Compilar solución completa
+        run: dotnet build Festival.Store.System.slnx --no-restore --configuration Release
+
+      - name: Ejecutar pruebas unitarias
+        run: |
+          dotnet test Festival.Store.System.slnx \
+            --no-build \
+            --configuration Release \
+            --verbosity normal \
+            --collect:"XPlat Code Coverage" \
+            --results-directory ./coverage
+
+      - name: Subir reporte de cobertura
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coverage-report
+          path: ./coverage
+
+  # ===========================================================================
+  # JOB 2: Build y Push de imágenes Docker
+  # Solo corre si los tests pasan y es push a main (no PRs)
+  # ===========================================================================
+  docker-build-push:
+    name: Build & Push Docker Images
+    runs-on: ubuntu-latest
+    needs: build-and-test
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    strategy:
+      matrix:
+        # Construimos cada microservicio en paralelo (matrix strategy)
+        service:
+          - name: gateway-api
+            dockerfile: Festival.Gateway.Api/Dockerfile
+            image: festival-gateway-api
+          - name: inventory-api
+            dockerfile: Festival.Inventory.Api/Dockerfile
+            image: festival-inventory-api
+          - name: order-api
+            dockerfile: Festival.Order.Api/Dockerfile
+            image: festival-order-api
+          - name: price-api
+            dockerfile: Festival.Price.Api/Dockerfile
+            image: festival-price-api
+          - name: ticket-api
+            dockerfile: Festival.Ticket.Api/Dockerfile
+            image: festival-ticket-api
+          - name: search-api
+            dockerfile: Festival.Search.Api/Dockerfile
+            image: festival-search-api
+
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Configurar Docker Buildx (multi-platform)
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login a Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Extraer metadata para el tag de la imagen
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.DOCKER_USERNAME }}/${{ matrix.service.image }}
+          tags: |
+            type=sha,prefix=sha-,format=short   # Tag con el SHA del commit: sha-a1b2c3d
+            type=raw,value=latest                # Tag 'latest' siempre apunta al último
+
+      - name: Build y Push de ${{ matrix.service.name }}
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ${{ matrix.service.dockerfile }}
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          # Cache de capas de Docker entre builds (más rápido en subsecuentes ejecuciones)
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          platforms: linux/amd64,linux/arm64  # Compatible con AWS Graviton y servidores x86
+
+  # ===========================================================================
+  # JOB 3: Deploy a Kubernetes (Opcional - solo si tienes kubeconfig configurado)
+  # ===========================================================================
+  deploy-to-kubernetes:
+    name: Deploy to Kubernetes
+    runs-on: ubuntu-latest
+    needs: docker-build-push
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    environment: production    # Requiere aprobación manual en GitHub Environments
+
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Configurar kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: 'v1.29.0'
+
+      - name: Configurar kubeconfig
+        run: |
+          mkdir -p ~/.kube
+          echo "${{ secrets.KUBECONFIG }}" | base64 -d > ~/.kube/config
+          chmod 600 ~/.kube/config
+
+      - name: Obtener SHA corto del commit
+        id: sha
+        run: echo "SHORT_SHA=$(echo $GITHUB_SHA | cut -c1-7)" >> $GITHUB_OUTPUT
+
+      - name: Actualizar imagen en Kubernetes (rolling update sin downtime)
+        run: |
+          NAMESPACE=festival
+          SHA_TAG="sha-${{ steps.sha.outputs.SHORT_SHA }}"
+          
+          # Actualizar cada deployment con la nueva imagen
+          for service in gateway-api inventory-api order-api price-api ticket-api search-api; do
+            kubectl set image deployment/$service \
+              $service=${{ env.DOCKER_USERNAME }}/festival-$service:$SHA_TAG \
+              -n $NAMESPACE
+          done
+
+      - name: Aplicar cambios de infraestructura K8s (si los hay)
+        run: |
+          kubectl apply -f k8s/ -n festival
+
+      - name: Verificar rollout exitoso
+        run: |
+          NAMESPACE=festival
+          for deployment in gateway-api inventory-api order-api price-api ticket-api search-api; do
+            echo "Verificando $deployment..."
+            kubectl rollout status deployment/$deployment -n $NAMESPACE --timeout=120s
+          done
+          echo "✅ Todos los servicios desplegados exitosamente"
+
+      - name: Notificar deploy exitoso
+        if: success()
+        run: |
+          echo "🚀 Deploy exitoso a producción"
+          echo "Commit: ${{ github.sha }}"
+          echo "Autor: ${{ github.actor }}"

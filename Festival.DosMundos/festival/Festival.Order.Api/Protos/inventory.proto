@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+option csharp_namespace = "Festival.Inventory.Api.Protos";
+
+package Inventory;
+
+// Servicio gRPC de inventario de boletas.
+// Comunicación binaria para máxima velocidad entre Order.Api e Inventory.Api.
+service InventoryService {
+    // Verifica si hay boletas disponibles para una sede y evento
+    rpc CheckStock(StockRequest) returns (StockResponse);
+
+    // Reserva boletas (descuenta del inventario) - acción de la SAGA
+    rpc ReserveStock(ReserveRequest) returns (ReserveResponse);
+
+    // Libera boletas reservadas - compensación de la SAGA
+    rpc ReleaseStock(ReleaseRequest) returns (ReleaseResponse);
+}
+
+message StockRequest {
+    int32 event_id = 1;  // ID del evento/concierto
+    string sede = 2;     // "Medellin" | "Madrid"
+}
+
+message StockResponse {
+    int32 event_id = 1;
+    int32 boletas_disponibles = 2;
+    bool is_available = 3;
+    string sede = 4;
+}
+
+message ReserveRequest {
+    int32 event_id = 1;
+    string sede = 2;
+    int32 quantity = 3;
+    string correlation_id = 4; // Para trazabilidad
+}
+
+message ReserveResponse {
+    bool success = 1;
+    int32 boletas_restantes = 2;
+    string message = 3;
+}
+
+message ReleaseRequest {
+    int32 event_id = 1;
+    string sede = 2;
+    int32 quantity = 3;
+    string correlation_id = 4;
+}
+
+message ReleaseResponse {
+    bool success = 1;
+    int32 boletas_restantes = 2;
+}

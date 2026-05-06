@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "dgSpecHash": "LOiuVIvwSyE=",
+  "success": false,
+  "projectFilePath": "C:\\Temp\\ITM-Tickets-Global-The-World-Tour-2026-\\Festival.DosMundos\\festival\\Festival.Store.Mobile\\Festival.Store.Mobile.csproj",
+  "expectedPackageFiles": [],
+  "logs": [
+    {
+      "code": "NU1012",
+      "level": "Error",
+      "message": "La versión de la plataforma no está presente para una o varias plataformas de destino, aunque se haya especificado una plataforma: net8.0-ios, net8.0-maccatalyst",
+      "projectPath": "C:\\Temp\\ITM-Tickets-Global-The-World-Tour-2026-\\Festival.DosMundos\\festival\\Festival.Store.Mobile\\Festival.Store.Mobile.csproj",
+      "filePath": "C:\\Temp\\ITM-Tickets-Global-The-World-Tour-2026-\\Festival.DosMundos\\festival\\Festival.Store.Mobile\\Festival.Store.Mobile.csproj",
+      "targetGraphs": []
+    }
+  ]
+}

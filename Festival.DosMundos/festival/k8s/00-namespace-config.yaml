@@ -1,0 +1,42 @@
+# =============================================================================
+# FESTIVAL DE LOS DOS MUNDOS - Kubernetes: Namespace + ConfigMap
+# =============================================================================
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: festival
+  labels:
+    app: festival-dos-mundos
+    env: production
+
+---
+# ConfigMap: variables de configuración NO secretas compartidas entre servicios
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: festival-config
+  namespace: festival
+data:
+  ASPNETCORE_ENVIRONMENT: "Production"
+  RabbitMQ__Host: "rabbitmq-service"
+  RabbitMQ__Username: "guest"
+  ConnectionStrings__Redis: "redis-service:6379"
+  Elasticsearch__Url: "http://elasticsearch-service:9200"
+  Qdrant__Url: "http://qdrant-service:6333"
+  GrpcEndpoints__Inventory: "http://inventory-service:5101"
+  HttpEndpoints__Price: "http://price-service:5200"
+
+---
+# Secret: valores sensibles (en producción usar Azure Key Vault o AWS Secrets Manager)
+apiVersion: v1
+kind: Secret
+metadata:
+  name: festival-secrets
+  namespace: festival
+type: Opaque
+stringData:
+  JwtSettings__SecretKey: "Festival-Dos-Mundos-Super-Secret-Key-2026-ITM-Nivel5"
+  JwtSettings__Issuer: "FestivalIdentityServer"
+  JwtSettings__Audience: "FestivalApis"
+  RabbitMQ__Password: "guest"

@@ -1,0 +1,10 @@
+<Solution>
+  <Project Path="Festival.Gateway.Api/Festival.Gateway.Api.csproj" />
+  <Project Path="Festival.Inventory.Api/Festival.Inventory.Api.csproj" />
+  <Project Path="Festival.Order.Api/Festival.Order.Api.csproj" />
+  <Project Path="Festival.Price.Api/Festival.Price.Api.csproj" />
+  <Project Path="Festival.Ticket.Api/Festival.Ticket.Api.csproj" />
+  <Project Path="Festival.Search.Api/Festival.Search.Api.csproj" />
+  <Project Path="Festival.Shared.Events/Festival.Shared.Events.csproj" />
+  <Project Path="Festival.Store.Mobile/Festival.Store.Mobile.csproj" />
+</Solution>

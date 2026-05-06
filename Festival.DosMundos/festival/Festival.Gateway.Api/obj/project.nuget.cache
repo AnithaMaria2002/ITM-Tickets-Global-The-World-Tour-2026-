@@ -1,0 +1,31 @@
+{
+  "version": 2,
+  "dgSpecHash": "7Yd1H5SbblU=",
+  "success": false,
+  "projectFilePath": "C:\\Users\\ANAMARIAVALENCIAQUIN\\Downloads\\Festival.DosMundos\\festival\\Festival.Gateway.Api\\Festival.Gateway.Api.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ANAMARIAVALENCIAQUIN\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\8.0.0\\microsoft.aspnetcore.authentication.jwtbearer.8.0.0.nupkg.sha512",
+    "C:\\Users\\ANAMARIAVALENCIAQUIN\\.nuget\\packages\\microsoft.identitymodel.abstractions\\7.0.3\\microsoft.identitymodel.abstractions.7.0.3.nupkg.sha512",
+    "C:\\Users\\ANAMARIAVALENCIAQUIN\\.nuget\\packages\\microsoft.identitymodel.jsonwebtokens\\7.0.3\\microsoft.identitymodel.jsonwebtokens.7.0.3.nupkg.sha512",
+    "C:\\Users\\ANAMARIAVALENCIAQUIN\\.nuget\\packages\\microsoft.identitymodel.logging\\7.0.3\\microsoft.identitymodel.logging.7.0.3.nupkg.sha512",
+    "C:\\Users\\ANAMARIAVALENCIAQUIN\\.nuget\\packages\\microsoft.identitymodel.protocols\\7.0.3\\microsoft.identitymodel.protocols.7.0.3.nupkg.sha512",
+    "C:\\Users\\ANAMARIAVALENCIAQUIN\\.nuget\\packages\\microsoft.identitymodel.protocols.openidconnect\\7.0.3\\microsoft.identitymodel.protocols.openidconnect.7.0.3.nupkg.sha512",
+    "C:\\Users\\ANAMARIAVALENCIAQUIN\\.nuget\\packages\\microsoft.identitymodel.tokens\\7.0.0\\microsoft.identitymodel.tokens.7.0.0.nupkg.sha512",
+    "C:\\Users\\ANAMARIAVALENCIAQUIN\\.nuget\\packages\\system.identitymodel.tokens.jwt\\7.0.3\\system.identitymodel.tokens.jwt.7.0.3.nupkg.sha512",
+    "C:\\Users\\ANAMARIAVALENCIAQUIN\\.nuget\\packages\\system.io.hashing\\8.0.0\\system.io.hashing.8.0.0.nupkg.sha512",
+    "C:\\Users\\ANAMARIAVALENCIAQUIN\\.nuget\\packages\\yarp.reverseproxy\\2.2.0\\yarp.reverseproxy.2.2.0.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1605",
+      "level": "Error",
+      "message": "Advertencia como error: Degradación del paquete detectada: Microsoft.IdentityModel.Tokens de 7.0.3 a 7.0.0. Haga referencia al paquete directamente desde el proyecto para seleccionar una versión diferente. \r\n Festival.Gateway.Api -> Microsoft.AspNetCore.Authentication.JwtBearer 8.0.0 -> Microsoft.IdentityModel.Protocols.OpenIdConnect 7.0.3 -> Microsoft.IdentityModel.Protocols 7.0.3 -> Microsoft.IdentityModel.Tokens (>= 7.0.3) \r\n Festival.Gateway.Api -> Microsoft.IdentityModel.Tokens (>= 7.0.0)",
+      "projectPath": "C:\\Users\\ANAMARIAVALENCIAQUIN\\Downloads\\Festival.DosMundos\\festival\\Festival.Gateway.Api\\Festival.Gateway.Api.csproj",
+      "filePath": "C:\\Users\\ANAMARIAVALENCIAQUIN\\Downloads\\Festival.DosMundos\\festival\\Festival.Gateway.Api\\Festival.Gateway.Api.csproj",
+      "libraryId": "Microsoft.IdentityModel.Tokens",
+      "targetGraphs": [
+        "net8.0"
+      ]
+    }
+  ]
+}

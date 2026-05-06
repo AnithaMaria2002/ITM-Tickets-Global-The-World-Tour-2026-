@@ -1,0 +1,17 @@
+C:\Users\ANAMARIAVALENCIAQUIN\Downloads\Festival.DosMundos\festival\Festival.Order.Api\obj\Debug\net8.0\Festival.Order.Api.csproj.AssemblyReference.cache
+C:\Users\ANAMARIAVALENCIAQUIN\Downloads\Festival.DosMundos\festival\Festival.Order.Api\obj\Debug\net8.0\rpswa.dswa.cache.json
+C:\Users\ANAMARIAVALENCIAQUIN\Downloads\Festival.DosMundos\festival\Festival.Order.Api\obj\Debug\net8.0\Festival.Order.Api.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ANAMARIAVALENCIAQUIN\Downloads\Festival.DosMundos\festival\Festival.Order.Api\obj\Debug\net8.0\Festival.Order.Api.AssemblyInfoInputs.cache
+C:\Users\ANAMARIAVALENCIAQUIN\Downloads\Festival.DosMundos\festival\Festival.Order.Api\obj\Debug\net8.0\Festival.Order.Api.AssemblyInfo.cs
+C:\Users\ANAMARIAVALENCIAQUIN\Downloads\Festival.DosMundos\festival\Festival.Order.Api\obj\Debug\net8.0\Festival.Order.Api.csproj.CoreCompileInputs.cache
+C:\Users\ANAMARIAVALENCIAQUIN\Downloads\Festival.DosMundos\festival\Festival.Order.Api\obj\Debug\net8.0\Festival.Order.Api.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\ANAMARIAVALENCIAQUIN\Downloads\Festival.DosMundos\festival\Festival.Order.Api\obj\Debug\net8.0\Festival.Order.Api.MvcApplicationPartsAssemblyInfo.cache
+C:\Temp\ITM-Tickets-Global-The-World-Tour-2026-\Festival.DosMundos\festival\Festival.Order.Api\obj\Debug\net8.0\Festival.Order.Api.csproj.AssemblyReference.cache
+C:\Temp\ITM-Tickets-Global-The-World-Tour-2026-\Festival.DosMundos\festival\Festival.Order.Api\obj\Debug\net8.0\rpswa.dswa.cache.json
+C:\Temp\ITM-Tickets-Global-The-World-Tour-2026-\Festival.DosMundos\festival\Festival.Order.Api\obj\Debug\net8.0\Festival.Order.Api.GeneratedMSBuildEditorConfig.editorconfig
+C:\Temp\ITM-Tickets-Global-The-World-Tour-2026-\Festival.DosMundos\festival\Festival.Order.Api\obj\Debug\net8.0\Festival.Order.Api.AssemblyInfoInputs.cache
+C:\Temp\ITM-Tickets-Global-The-World-Tour-2026-\Festival.DosMundos\festival\Festival.Order.Api\obj\Debug\net8.0\Festival.Order.Api.AssemblyInfo.cs
+C:\Temp\ITM-Tickets-Global-The-World-Tour-2026-\Festival.DosMundos\festival\Festival.Order.Api\obj\Debug\net8.0\Festival.Order.Api.csproj.CoreCompileInputs.cache
+C:\Temp\ITM-Tickets-Global-The-World-Tour-2026-\Festival.DosMundos\festival\Festival.Order.Api\obj\Debug\net8.0\Festival.Order.Api.MvcApplicationPartsAssemblyInfo.cs
+C:\Temp\ITM-Tickets-Global-The-World-Tour-2026-\Festival.DosMundos\festival\Festival.Order.Api\obj\Debug\net8.0\Festival.Order.Api.MvcApplicationPartsAssemblyInfo.cache
+C:\Temp\ITM-Tickets-Global-The-World-Tour-2026-\Festival.DosMundos\festival\Festival.Order.Api\obj\Debug\net8.0\Festival.Order.Api.sourcelink.json

@@ -1,0 +1,460 @@
+# =============================================================================
+# FESTIVAL DE LOS DOS MUNDOS - Kubernetes: Microservicios + HPA
+# Horizontal Pod Autoscaler: escala automáticamente bajo carga
+# =============================================================================
+
+# ---------- INVENTORY API ----------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inventory-api
+  namespace: festival
+spec:
+  replicas: 2         # Mínimo 2 réplicas para alta disponibilidad
+  selector:
+    matchLabels:
+      app: inventory-api
+  template:
+    metadata:
+      labels:
+        app: inventory-api
+    spec:
+      containers:
+        - name: inventory-api
+          image: tuusuario/festival-inventory-api:latest  # Reemplaza con tu usuario de Docker Hub
+          ports:
+            - containerPort: 5100   # HTTP
+            - containerPort: 5101   # gRPC
+          envFrom:
+            - configMapRef:
+                name: festival-config
+            - secretRef:
+                name: festival-secrets
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+          livenessProbe:      # K8s mata el pod si no responde
+            httpGet:
+              path: /health
+              port: 5100
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          readinessProbe:     # K8s no manda tráfico hasta que esté listo
+            httpGet:
+              path: /health
+              port: 5100
+            initialDelaySeconds: 5
+            periodSeconds: 5
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inventory-service
+  namespace: festival
+spec:
+  selector:
+    app: inventory-api
+  ports:
+    - name: http
+      port: 5100
+      targetPort: 5100
+    - name: grpc
+      port: 5101
+      targetPort: 5101
+
+---
+# HPA: Auto-escalado del Inventory basado en CPU
+# En el minuto cero de venta: pasa de 2 a 10 pods automáticamente
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: inventory-hpa
+  namespace: festival
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: inventory-api
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 60   # Escala cuando CPU supera el 60%
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: 70
+
+---
+# ---------- PRICE API ----------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: price-api
+  namespace: festival
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: price-api
+  template:
+    metadata:
+      labels:
+        app: price-api
+    spec:
+      containers:
+        - name: price-api
+          image: tuusuario/festival-price-api:latest
+          ports:
+            - containerPort: 5200
+          envFrom:
+            - configMapRef:
+                name: festival-config
+            - secretRef:
+                name: festival-secrets
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+          livenessProbe:
+            httpGet: { path: /health, port: 5200 }
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          readinessProbe:
+            httpGet: { path: /health, port: 5200 }
+            initialDelaySeconds: 5
+            periodSeconds: 5
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: price-service
+  namespace: festival
+spec:
+  selector:
+    app: price-api
+  ports:
+    - port: 5200
+      targetPort: 5200
+
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: price-hpa
+  namespace: festival
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: price-api
+  minReplicas: 2
+  maxReplicas: 8
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 60
+
+---
+# ---------- ORDER API ----------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-api
+  namespace: festival
+spec:
+  replicas: 3         # Más réplicas: es el servicio más demandado
+  selector:
+    matchLabels:
+      app: order-api
+  template:
+    metadata:
+      labels:
+        app: order-api
+    spec:
+      containers:
+        - name: order-api
+          image: tuusuario/festival-order-api:latest
+          ports:
+            - containerPort: 5000
+          envFrom:
+            - configMapRef:
+                name: festival-config
+            - secretRef:
+                name: festival-secrets
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "200m"
+            limits:
+              memory: "512Mi"
+              cpu: "1000m"
+          livenessProbe:
+            httpGet: { path: /health, port: 5000 }
+            initialDelaySeconds: 20
+            periodSeconds: 10
+          readinessProbe:
+            httpGet: { path: /health, port: 5000 }
+            initialDelaySeconds: 10
+            periodSeconds: 5
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: order-service
+  namespace: festival
+spec:
+  selector:
+    app: order-api
+  ports:
+    - port: 5000
+      targetPort: 5000
+
+---
+# HPA del Order: escala agresivamente en el minuto cero
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: order-hpa
+  namespace: festival
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: order-api
+  minReplicas: 3
+  maxReplicas: 20     # Hasta 20 pods en pico de 50k usuarios
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 50   # Más agresivo: escala antes de saturarse
+
+---
+# ---------- TICKET API ----------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ticket-api
+  namespace: festival
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ticket-api
+  template:
+    metadata:
+      labels:
+        app: ticket-api
+    spec:
+      containers:
+        - name: ticket-api
+          image: tuusuario/festival-ticket-api:latest
+          ports:
+            - containerPort: 5300
+          envFrom:
+            - configMapRef:
+                name: festival-config
+            - secretRef:
+                name: festival-secrets
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+          livenessProbe:
+            httpGet: { path: /health, port: 5300 }
+            initialDelaySeconds: 15
+            periodSeconds: 10
+          readinessProbe:
+            httpGet: { path: /health, port: 5300 }
+            initialDelaySeconds: 5
+            periodSeconds: 5
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ticket-service
+  namespace: festival
+spec:
+  selector:
+    app: ticket-api
+  ports:
+    - port: 5300
+      targetPort: 5300
+
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: ticket-hpa
+  namespace: festival
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: ticket-api
+  minReplicas: 2
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 60
+
+---
+# ---------- SEARCH API ----------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: search-api
+  namespace: festival
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: search-api
+  template:
+    metadata:
+      labels:
+        app: search-api
+    spec:
+      containers:
+        - name: search-api
+          image: tuusuario/festival-search-api:latest
+          ports:
+            - containerPort: 5400
+          envFrom:
+            - configMapRef:
+                name: festival-config
+            - secretRef:
+                name: festival-secrets
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+          livenessProbe:
+            httpGet: { path: /health, port: 5400 }
+            initialDelaySeconds: 30   # Más tiempo: espera a Elasticsearch
+            periodSeconds: 10
+          readinessProbe:
+            httpGet: { path: /health, port: 5400 }
+            initialDelaySeconds: 15
+            periodSeconds: 5
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: search-service
+  namespace: festival
+spec:
+  selector:
+    app: search-api
+  ports:
+    - port: 5400
+      targetPort: 5400
+
+---
+# ---------- GATEWAY API ----------
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateway-api
+  namespace: festival
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: gateway-api
+  template:
+    metadata:
+      labels:
+        app: gateway-api
+    spec:
+      containers:
+        - name: gateway-api
+          image: tuusuario/festival-gateway-api:latest
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - configMapRef:
+                name: festival-config
+            - secretRef:
+                name: festival-secrets
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "200m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
+          livenessProbe:
+            httpGet: { path: /health, port: 8080 }
+            initialDelaySeconds: 15
+            periodSeconds: 10
+
+---
+# Service de tipo LoadBalancer: expone el Gateway al mundo exterior
+apiVersion: v1
+kind: Service
+metadata:
+  name: gateway-service
+  namespace: festival
+spec:
+  type: LoadBalancer      # En cloud: asigna IP pública automáticamente
+  selector:
+    app: gateway-api
+  ports:
+    - port: 80
+      targetPort: 8080
+
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: gateway-hpa
+  namespace: festival
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: gateway-api
+  minReplicas: 2
+  maxReplicas: 5
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 60

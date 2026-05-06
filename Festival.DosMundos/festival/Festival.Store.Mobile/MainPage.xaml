@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Festival.Store.Mobile.MainPage"
+             Title="🎵 Festival de los Dos Mundos"
+             BackgroundColor="#1A1A2E">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20">
+
+            <!-- HEADER -->
+            <Label Text="🎵 Festival de los Dos Mundos"
+                   FontSize="22" FontAttributes="Bold"
+                   HorizontalOptions="Center"
+                   TextColor="#E94560" />
+            <Label Text="Medellín 🇨🇴 | Madrid 🇪🇸"
+                   FontSize="14"
+                   HorizontalOptions="Center"
+                   TextColor="#A8A8B3" />
+
+            <!-- ZONA DE LOGIN / TOKEN -->
+            <Frame BackgroundColor="#16213E" BorderColor="#E94560" CornerRadius="12" Padding="15">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="🔐 Autenticación JWT"
+                           FontAttributes="Bold" TextColor="#E94560" FontSize="16" />
+                    <Entry x:Name="EmailEntry"
+                           Placeholder="tu@email.com"
+                           PlaceholderColor="#A8A8B3"
+                           TextColor="White"
+                           Text="admin@festival.com"
+                           BackgroundColor="#0F3460" />
+                    <Button x:Name="LoginBtn"
+                            Text="Iniciar Sesión (Guardar Token JWT)"
+                            BackgroundColor="#E94560"
+                            TextColor="White"
+                            CornerRadius="8"
+                            Clicked="OnLoginClicked" />
+                    <Label x:Name="LoginStatus"
+                           Text="Estado: Sin autenticar"
+                           TextColor="#A8A8B3" FontSize="12"
+                           HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- ZONA DE BÚSQUEDA -->
+            <Frame BackgroundColor="#16213E" BorderColor="#533483" CornerRadius="12" Padding="15">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="🔍 Buscar Eventos"
+                           FontAttributes="Bold" TextColor="#533483" FontSize="16" />
+                    <Entry x:Name="SearchEntry"
+                           Placeholder="Buscar por texto (ej: rock, jazz)..."
+                           PlaceholderColor="#A8A8B3"
+                           TextColor="White"
+                           BackgroundColor="#0F3460" />
+                    <Button Text="Búsqueda por Texto (Elasticsearch)"
+                            BackgroundColor="#533483" TextColor="White"
+                            CornerRadius="8"
+                            Clicked="OnSearchTextClicked" />
+                    <Entry x:Name="VibeEntry"
+                           Placeholder="¿Cuál es tu vibe? (ej: quiero bailar toda la noche)..."
+                           PlaceholderColor="#A8A8B3"
+                           TextColor="White"
+                           BackgroundColor="#0F3460" />
+                    <Button Text="🧠 Búsqueda Semántica por IA (Qdrant)"
+                            BackgroundColor="#0F3460" TextColor="#533483"
+                            CornerRadius="8"
+                            Clicked="OnSearchSemanticClicked" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- ZONA DE COMPRA DE BOLETA -->
+            <Frame BackgroundColor="#16213E" BorderColor="#4CAF50" CornerRadius="12" Padding="15">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="🎟️ Comprar Boleta"
+                           FontAttributes="Bold" TextColor="#4CAF50" FontSize="16" />
+
+                    <Picker x:Name="EventoPicker"
+                            Title="Selecciona el evento"
+                            TitleColor="#A8A8B3"
+                            TextColor="White"
+                            BackgroundColor="#0F3460">
+                        <Picker.Items>
+                            <x:String>1 - Festival Rock</x:String>
+                            <x:String>2 - Electronic Nights</x:String>
+                            <x:String>3 - Jazz &amp; Soul</x:String>
+                        </Picker.Items>
+                    </Picker>
+
+                    <Picker x:Name="SedePicker"
+                            Title="Selecciona la sede"
+                            TitleColor="#A8A8B3"
+                            TextColor="White"
+                            BackgroundColor="#0F3460">
+                        <Picker.Items>
+                            <x:String>Medellin 🇨🇴</x:String>
+                            <x:String>Madrid 🇪🇸</x:String>
+                        </Picker.Items>
+                    </Picker>
+
+                    <Picker x:Name="CategoriaPicker"
+                            Title="Categoría"
+                            TitleColor="#A8A8B3"
+                            TextColor="White"
+                            BackgroundColor="#0F3460">
+                        <Picker.Items>
+                            <x:String>General</x:String>
+                            <x:String>Vip</x:String>
+                        </Picker.Items>
+                    </Picker>
+
+                    <Stepper x:Name="CantidadStepper"
+                             Minimum="1" Maximum="10" Value="1"
+                             ValueChanged="OnCantidadChanged" />
+                    <Label x:Name="CantidadLabel"
+                           Text="Cantidad: 1 boleta(s)"
+                           TextColor="#A8A8B3" HorizontalOptions="Center" />
+
+                    <Button x:Name="ComprarBtn"
+                            Text="💳 Comprar Boletas (SAGA + gRPC)"
+                            BackgroundColor="#4CAF50" TextColor="White"
+                            CornerRadius="8" FontAttributes="Bold"
+                            Clicked="OnComprarClicked" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- ZONA DE RESULTADO / NOTIFICACIÓN SIGNALR -->
+            <Frame BackgroundColor="#16213E" BorderColor="#FFB703" CornerRadius="12" Padding="15">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="📡 Estado en Tiempo Real (SignalR)"
+                           FontAttributes="Bold" TextColor="#FFB703" FontSize="16" />
+                    <Label x:Name="SignalRStatus"
+                           Text="🔴 Desconectado"
+                           TextColor="#A8A8B3" FontSize="12"
+                           HorizontalOptions="Center" />
+                    <Frame x:Name="BoletaFrame"
+                           BackgroundColor="#0F3460" IsVisible="False"
+                           CornerRadius="8" Padding="15">
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="🎟️ ¡BOLETA GENERADA!" FontAttributes="Bold"
+                                   TextColor="#4CAF50" FontSize="18" HorizontalOptions="Center" />
+                            <Label x:Name="BoletaQr" TextColor="#FFB703"
+                                   FontSize="14" HorizontalOptions="Center" />
+                            <Label x:Name="BoletaInfo" TextColor="White"
+                                   FontSize="12" HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+                    </Frame>
+                    <ActivityIndicator x:Name="LoadingIndicator"
+                                       IsRunning="False"
+                                       Color="#E94560" />
+                    <Label x:Name="ResultLabel"
+                           Text="Realiza una acción para ver el resultado..."
+                           TextColor="#A8A8B3" FontSize="13"
+                           HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

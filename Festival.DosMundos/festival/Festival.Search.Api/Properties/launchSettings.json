@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Festival.Search.Api": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:55003;http://localhost:55004"
+    }
+  }
+}

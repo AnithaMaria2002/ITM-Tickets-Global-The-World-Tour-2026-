@@ -1,0 +1,211 @@
+{
+  "version": 3,
+  "targets": {
+    "net8.0-android21.0": {},
+    "net8.0-ios": {},
+    "net8.0-maccatalyst": {}
+  },
+  "libraries": {},
+  "projectFileDependencyGroups": {
+    "net8.0-android21.0": [
+      "Microsoft.AspNetCore.SignalR.Client >= 8.0.0",
+      "Microsoft.Extensions.Http.Resilience >= 8.0.0",
+      "Microsoft.Maui.Controls >= 8.0.14",
+      "Microsoft.Maui.Controls.Compatibility >= 8.0.14"
+    ],
+    "net8.0-ios": [
+      "Microsoft.AspNetCore.SignalR.Client >= 8.0.0",
+      "Microsoft.Extensions.Http.Resilience >= 8.0.0",
+      "Microsoft.Maui.Controls >= 8.0.14",
+      "Microsoft.Maui.Controls.Compatibility >= 8.0.14"
+    ],
+    "net8.0-maccatalyst": [
+      "Microsoft.AspNetCore.SignalR.Client >= 8.0.0",
+      "Microsoft.Extensions.Http.Resilience >= 8.0.0",
+      "Microsoft.Maui.Controls >= 8.0.14",
+      "Microsoft.Maui.Controls.Compatibility >= 8.0.14"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\ANAMARIAVALENCIAQUIN\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Temp\\ITM-Tickets-Global-The-World-Tour-2026-\\Festival.DosMundos\\festival\\Festival.Store.Mobile\\Festival.Store.Mobile.csproj",
+      "projectName": "Festival.Store.Mobile",
+      "projectPath": "C:\\Temp\\ITM-Tickets-Global-The-World-Tour-2026-\\Festival.DosMundos\\festival\\Festival.Store.Mobile\\Festival.Store.Mobile.csproj",
+      "packagesPath": "C:\\Users\\ANAMARIAVALENCIAQUIN\\.nuget\\packages\\",
+      "outputPath": "C:\\Temp\\ITM-Tickets-Global-The-World-Tour-2026-\\Festival.DosMundos\\festival\\Festival.Store.Mobile\\obj\\",
+      "projectStyle": "PackageReference",
+      "crossTargeting": true,
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\ANAMARIAVALENCIAQUIN\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net8.0-android",
+        "net8.0-ios",
+        "net8.0-maccatalyst"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net8.0-android21.0": {
+          "targetAlias": "net8.0-android",
+          "projectReferences": {}
+        },
+        "net8.0-ios": {
+          "targetAlias": "net8.0-ios",
+          "projectReferences": {}
+        },
+        "net8.0-maccatalyst": {
+          "targetAlias": "net8.0-maccatalyst",
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      },
+      "SdkAnalysisLevel": "10.0.100"
+    },
+    "frameworks": {
+      "net8.0-android21.0": {
+        "targetAlias": "net8.0-android",
+        "dependencies": {
+          "Microsoft.AspNetCore.SignalR.Client": {
+            "target": "Package",
+            "version": "[8.0.0, )"
+          },
+          "Microsoft.Extensions.Http.Resilience": {
+            "target": "Package",
+            "version": "[8.0.0, )"
+          },
+          "Microsoft.Maui.Controls": {
+            "target": "Package",
+            "version": "[8.0.14, )"
+          },
+          "Microsoft.Maui.Controls.Compatibility": {
+            "target": "Package",
+            "version": "[8.0.14, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103/PortableRuntimeIdentifierGraph.json"
+      },
+      "net8.0-ios": {
+        "targetAlias": "net8.0-ios",
+        "dependencies": {
+          "Microsoft.AspNetCore.SignalR.Client": {
+            "target": "Package",
+            "version": "[8.0.0, )"
+          },
+          "Microsoft.Extensions.Http.Resilience": {
+            "target": "Package",
+            "version": "[8.0.0, )"
+          },
+          "Microsoft.Maui.Controls": {
+            "target": "Package",
+            "version": "[8.0.14, )"
+          },
+          "Microsoft.Maui.Controls.Compatibility": {
+            "target": "Package",
+            "version": "[8.0.14, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103/PortableRuntimeIdentifierGraph.json"
+      },
+      "net8.0-maccatalyst": {
+        "targetAlias": "net8.0-maccatalyst",
+        "dependencies": {
+          "Microsoft.AspNetCore.SignalR.Client": {
+            "target": "Package",
+            "version": "[8.0.0, )"
+          },
+          "Microsoft.Extensions.Http.Resilience": {
+            "target": "Package",
+            "version": "[8.0.0, )"
+          },
+          "Microsoft.Maui.Controls": {
+            "target": "Package",
+            "version": "[8.0.14, )"
+          },
+          "Microsoft.Maui.Controls.Compatibility": {
+            "target": "Package",
+            "version": "[8.0.14, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103/PortableRuntimeIdentifierGraph.json"
+      }
+    }
+  },
+  "logs": [
+    {
+      "code": "NU1012",
+      "level": "Error",
+      "message": "La versión de la plataforma no está presente para una o varias plataformas de destino, aunque se haya especificado una plataforma: net8.0-ios, net8.0-maccatalyst"
+    }
+  ]
+}
